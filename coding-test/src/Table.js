@@ -50,8 +50,8 @@ class Table extends Component {
            <td style={{color: 'black'}}>{entry.totalReturn}</td>
          }
          {cumuReturn < 0 ?
-           <td style={{color: 'red'}}>{cumuReturn}</td> :
-           <td style={{color: 'black'}}>{cumuReturn}</td>
+           <td style={{color: 'red'}}>{cumuReturn.toFixed(2)}</td> :
+           <td style={{color: 'black'}}>{cumuReturn.toFixed(2)}</td>
          }
         </tr>
       );
