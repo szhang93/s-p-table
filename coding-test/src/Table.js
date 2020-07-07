@@ -8,11 +8,10 @@ class Table extends Component {
   constructor(props) {
     super(props);
 
-    // sort history data
+    // sort history data ascending
     history.sort((a, b) => { return(a.year - b.year); });
-    this.tableRows = this.tableRows.bind(this);
-    this.updateSlider = this.updateSlider.bind(this);
 
+    // Maximum start year & end year (Range min/max)
     this.maxStartYear = 0;
     this.maxEndYear = 0;
 
@@ -20,17 +19,24 @@ class Table extends Component {
       this.maxStartYear = history[0].year;
       this.maxEndYear = history[history.length-1].year;
     }
+    // startYear & endYear keep track of current Range values
     this.state = {
       startYear : this.maxStartYear,
       endYear: this.maxEndYear
     }
-  }
 
-  componentDidMount() {
+    // Bind Methods
+    this.tableRows = this.tableRows.bind(this);
+    this.updateSlider = this.updateSlider.bind(this);
   }
 
   tableRows() {
-    var cumuReturn = 0.0;
+    var cumuReturn = 0.0; // Stores cumulative return value
+
+    // Filter the list first such that only rows in the correct
+    // year range are returned.
+    // Then, map the list into elements.
+    // The key to each element is the entry's year because it's always unique.
     var rowList = history.filter((entry) => {
       return (entry.year >= this.state.startYear && entry.year <= this.state.endYear);
     }).map((entry) => {
